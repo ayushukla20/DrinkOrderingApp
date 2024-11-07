@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drink Ordering App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #FAF3E3; /* Creamish off-white background */
+      margin: 0;
+      padding: 0;
+    }
+    .page {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    h1 {
+      color: gold;
+    }
+    .menu-container {
+      display: inline-block;
+      text-align: left; /* Left-aligns the options */
+      padding: 20px;
+    }
+    .menu-item {
+      margin: 15px 0;
+    }
+    .drink-button {
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      font-size: 1.2em;
+      font-family: inherit;
+      padding: 8px 12px;
+      cursor: pointer;
+      display: block;
+      text-align: left;
+      width: 100%;
+      outline: none;
+    }
+    .drink-button:hover {
+      font-weight: bold;
+    }
+    .gold { color: gold; }
+    .orange { color: orange; }
+    .yellow { color: #FFD700; } /* Yellow for Classic Whiskey Sour */
+    .purple { color: purple; }
+    .brown { color: #8B4513; } /* Brown for Apple Cider Whiskey Sour */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1: User Name Input -->
+  <div id="page1" class="page active">
+    <h2>Who's the drink for?</h2>
+    <input type="text" id="username" placeholder="Enter your name">
+    <button onclick="goToMenu()">View Menu</button>
+    <p id="name-error" style="color: red; display: none;">Please enter a name.</p>
+  </div>
+
+  <!-- Page 2: Menu Selection -->
+  <div id="page2" class="page">
+    <h1 id="welcome-message"></h1>
+    <div class="menu-container">
+      <button class="drink-button gold" onclick="selectDrink('Clarified Bees Knees')">
+        Clarified Bees Knees<br>
+        <small>Gin | Lemon | Honey</small>
+      </button>
+      <button class="drink-button orange" onclick="selectDrink('Hood Winked')">
+        Hood Winked<br>
+        <small>Mezcal | Pineapple | Aperol | Lemon</small>
+      </button>
+      <div class="menu-item">
+        <p>Whiskey Sour</p>
+        <button class="drink-button yellow" onclick="selectDrink('Whiskey Sour - Classic')">Classic</button>
+        <button class="drink-button purple" onclick="selectDrink('Whiskey Sour - Fig')">Fig</button>
+        <button class="drink-button brown" onclick="selectDrink('Whiskey Sour - Apple Cider')">Apple Cider</button>
+      </div>
+      <button class="drink-button gold" onclick="selectDrink('Pineapple Sunset')">
+        Pineapple Sunset<br>
+        <small>Pineapple | Lime | Pomegranate</small>
+      </button>
+    </div>
+    <button onclick="submitOrder()">Order</button>
+    <p id="drink-error" style="color: red; display: none;">Please select a drink.</p>
+  </div>
+
+  <!-- Page 3: Order Confirmation -->
+  <div id="page3" class="page">
+    <h2 id="thank-you-message"></h2>
+    <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
+    <button onclick="startOver()">Order a New Drink</button>
+  </div>
+
+  <script>
+    let userName = '';
+    let selectedDrink = '';
+
+    // Go to Menu Page
+    function goToMenu() {
+      userName = document.getElementById('username').value.trim();
+      if (userName === '') {
+        document.getElementById('name-error').style.display = 'block';
+      } else {
+        document.getElementById('name-error').style.display = 'none';
+        document.getElementById('welcome-message').textContent = `Welcome ${userName}, please select which drink you would like and hit order at the bottom.`;
+        document.getElementById('page1').classList.remove('active');
+        document.getElementById('page2').classList.add('active');
+      }
+    }
+
+    // Select Drink
+    function selectDrink(drink) {
+      selectedDrink = drink;
+      document.querySelectorAll('.drink-button').forEach(button => button.style.fontWeight = 'normal');
+      document.querySelector(`[onclick="selectDrink('${drink}')"]`).style.fontWeight = 'bold';
+    }
+    // Map of drink descriptions
+    const drinkDescriptions = {
+        "Clarified Bees Knees": "A refreshing twist on a classic gin cocktail with a silky texture. Clarification removes impurities, resulting in a smooth, golden drink that highlights the flavors of gin, lemon, and honey.",
+        "Hood Winked": "A bold, smoky blend of mezcal with tropical pineapple and a hint of bitterness from Aperol. This cocktail is perfect for those who enjoy complex, layered flavors with a bright citrus finish.",
+        "Whiskey Sour - Classic": "A timeless cocktail featuring a perfect balance of whiskey, fresh lemon juice, and simple syrup, garnished with a slice of lemon or a cherry.",
+        "Whiskey Sour - Fig": "A seasonal twist on the classic Whiskey Sour with the addition of fig, adding a rich and slightly sweet undertone that complements the whiskey’s warmth.",
+        "Whiskey Sour - Apple Cider": "A fall-inspired version of the Whiskey Sour made with fresh apple cider, creating a cozy, spiced flavor that pairs beautifully with whiskey."
+    };
+    // Submit Order
+    function submitOrder() {
+      if (!selectedDrink) {
+        document.getElementById('drink-error').style.display = 'block';
+      } else {
+        document.getElementById('drink-error').style.display = 'none';
+        document.getElementById('thank-you-message').textContent = `Thank you ${userName}! Your ${selectedDrink} will be ready soon.`;
+        // Display the specific description for the selected drink
+        document.getElementById('drink-info').textContent = drinkDescriptions[selectedDrink] || "Placeholder text for your selected drink.";
+        document.getElementById('page2').classList.remove('active');
+        document.getElementById('page3').classList.add('active');
+        // Send data to Google Sheets
+        sendToGoogleSheets(userName, selectedDrink);
+      }
+    }
+
+    // Reset for New Order
+    function startOver() {
+      document.getElementById('username').value = '';
+      selectedDrink = '';
+      document.querySelectorAll('.drink-button').forEach(button => button.style.fontWeight = 'normal');
+      document.getElementById('page3').classList.remove('active');
+      document.getElementById('page1').classList.add('active');
+    }
+
+    // Send data to Google Sheets
+    function sendToGoogleSheets(name, drink) {
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbymwydUgkV2p_2FH5OI9FuTLxqdcvUHCiPWHmWuRqU2kp0p1FHkfe9yocT_xe0HR5duyA/exec';
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({ 'name': name, 'drink': drink })
+      })
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message));
+    }
+
+    // function sendToGoogleSheets(name, drink) {
+    //   const scriptURL = 'https://script.google.com/macros/s/AKfycbymwydUgkV2p_2FH5OI9FuTLxqdcvUHCiPWHmWuRqU2kp0p1FHkfe9yocT_xe0HR5duyA/exec';
+    //   fetch(scriptURL, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },  // Ensures JSON data is sent
+    //     body: JSON.stringify({ name, drink })            // Converts data to JSON
+    // })
+    //     .then(response => response.text())
+    //     .then(result => console.log('Success:', result))
+    //     .catch(error => console.error('Error:', error));
+    // }
+    // function sendToGoogleSheets(name, drink) {
+    //     const scriptURL = 'https://script.google.com/macros/s/AKfycbxtBtgPiGvCrBXOKzrZ5LwGvlYtoVnz-_TZnD4DQ3jS/dev';
+    //     fetch(scriptURL, {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ name, drink })
+    //     })
+    //     .then(response => response.text())
+    //     .then(result => console.log('Success:', result))
+    //     .catch(error => console.error('Error:', error));
+    //     }
+  </script>
+</body>
+</html>
