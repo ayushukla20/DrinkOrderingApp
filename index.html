@@ -19,11 +19,22 @@
       display: block;
     }
     h1 {
-      color: gold;
+      color: rgba(38, 10, 116, 0.817);
+      font-size: 1.5em;
+    }
+    h2 {
+      font-size: 1.1em;
+      color: rgba(38, 10, 116, 0.817)
+    }
+    .horizontal_line {
+            width: 100%;
+            height: 5px;
+            border-top: 5px dotted rgba(38, 10, 116, 0.817);
+            line-height: 80%;
     }
     .menu-container {
       display: inline-block;
-      text-align: left; /* Left-aligns the options */
+      text-align: center; /* Left-aligns the options */
       padding: 20px;
     }
     .menu-item {
@@ -33,23 +44,58 @@
       background-color: transparent;
       border: none;
       color: inherit;
-      font-size: 1.2em;
+      font-size: 1em;
       font-family: inherit;
       padding: 8px 12px;
       cursor: pointer;
       display: block;
-      text-align: left;
+      text-align: center;
       width: 100%;
       outline: none;
     }
     .drink-button:hover {
       font-weight: bold;
     }
+    .generic-button {
+      background-color: transparent;
+      border: 1;
+      color: inherit;
+      font-size: 1em;
+      font-family: inherit;
+      padding: 8px 12px;
+      cursor: pointer;
+      display: block;
+      text-align: center;
+      width: 100%;
+      outline: none;
+    }
+    .button-34 {
+      background: #5E5DF0;
+      border-radius: 999px;
+      box-shadow: #5E5DF0 0 10px 20px -10px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      opacity: 1;
+      outline: 0 solid transparent;
+      padding: 8px 18px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      width: fit-content;
+      word-break: break-word;
+      border: 0;
+    }
     .gold { color: gold; }
     .orange { color: orange; }
     .yellow { color: #FFD700; } /* Yellow for Classic Whiskey Sour */
     .purple { color: purple; }
     .brown { color: #8B4513; } /* Brown for Apple Cider Whiskey Sour */
+    .black {color: black;}
     .hidden {
       display: none;
     }
@@ -61,7 +107,7 @@
   <div id="page1" class="page active">
     <h2>Who's the drink for?</h2>
     <input type="text" id="username" placeholder="Enter your name"><br><br>
-    <button onclick="goToMenu()">View Menu</button>
+    <button class="button-34" onclick="goToMenu()">View Menu</button>
     <p id="name-error" style="color: red; display: none;">Please enter a name.</p>
   </div>
 
@@ -69,26 +115,51 @@
   <div id="page2" class="page">
     <h1 id="welcome-message"></h1>
     <div class="menu-container">
-      <button class="drink-button gold" onclick="selectDrink('Clarified Bees Knees')">
-        Clarified Bees Knees<br>
-        <small>Gin | Lemon | Honey</small>
-      </button>
-      <button class="drink-button orange" onclick="selectDrink('Hood Winked')">
-        Hood Winked<br>
-        <small>Mezcal | Pineapple | Aperol | Lemon</small>
-      </button>
       <div class="menu-item">
-        <p>Whiskey Sour</p>
-        <button class="drink-button yellow" onclick="selectDrink('Whiskey Sour - Classic')">Classic</button>
-        <button class="drink-button purple" onclick="selectDrink('Whiskey Sour - Fig')">Fig</button>
-        <button class="drink-button brown" onclick="selectDrink('Whiskey Sour - Apple Cider')">Apple Cider</button>
+        <h2>Today's Features</h2>
+        <div class="horizontal_line"></div>
+        <button class="drink-button orange" onclick="selectDrink('Clarified Bees Knees')">
+          Clarified Bees Knees<br>
+          <small>Gin | Lemon | Honey</small>
+        </button>
+        <button class="drink-button orange" onclick="selectDrink('Hood Winked')">
+          Hood Winked<br>
+          <small>Mezcal | Pineapple | Aperol | Lemon</small>
+        </button>
       </div>
-      <button class="drink-button gold" onclick="selectDrink('Pineapple Sunset')">
-        Pineapple Sunset<br>
-        <small>Pineapple | Lime | Pomegranate</small>
-      </button>
+      <div class="menu-item">
+        <br>
+        <h2>Whiskey Sours</h2>
+        <div class="horizontal_line"></div>
+        <button class="drink-button orange" onclick="selectDrink('Whiskey Sour - Classic')">
+          Classic<br>
+          <small>Bourbon | Lemon | Simple | Aromatics</small>
+        </button>
+        <button class="drink-button orange" onclick="selectDrink('Whiskey Sour - Fig')">
+          Dementors in Little Winging! Whatever next?<br>
+          <small>Bourbon | Figg | Lemon</small>
+        </button>
+        <button class="drink-button orange" onclick="selectDrink('Whiskey Sour - Apple Cider')">
+          Wishing for that Fall Weather<br>
+          <small>Bourbon | Apple Cider | Maple Syrup</small>
+        </button>
+      </div>
+      <div class="menu-item">
+        <br>
+        <h2>Mocktails</h2>
+        <div class="horizontal_line"></div>
+        <button class="drink-button orange" onclick="selectDrink('Pineapple Sunset')">
+          Pineapple Sunset<br>
+          <small>Pineapple | Lime | Pomegranate</small>
+        </button>
+        <button class="drink-button orange" onclick="selectDrink('Apple Cider Mule')">
+          Apple Cider Mule<br>
+          <small>Apple Cider | Ginger Beer | Lime</small>
+        </button>
+      </div>
     </div>
-    <button onclick="submitOrder()">Order</button>
+    <br><br>
+    <button class="button-34" onclick="submitOrder()">Order</button>
     <p id="drink-error" style="color: red; display: none;">Please select a drink.</p>
   </div>
 
@@ -96,7 +167,7 @@
   <div id="page3" class="page">
     <h2 id="thank-you-message"></h2>
     <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
-    <button onclick="startOver()">Order a New Drink</button>
+    <button class="button-34" onclick="startOver()">Order a New Drink</button>
   </div>
 
   <script>
@@ -124,11 +195,13 @@
     }
     // Map of drink descriptions
     const drinkDescriptions = {
-        "Clarified Bees Knees": "A refreshing twist on a classic gin cocktail with a silky texture. Clarification removes impurities, resulting in a smooth, golden drink that highlights the flavors of gin, lemon, and honey.",
-        "Hood Winked": "A bold, smoky blend of mezcal with tropical pineapple and a hint of bitterness from Aperol. This cocktail is perfect for those who enjoy complex, layered flavors with a bright citrus finish.",
-        "Whiskey Sour - Classic": "A timeless cocktail featuring a perfect balance of whiskey, fresh lemon juice, and simple syrup, garnished with a slice of lemon or a cherry.",
-        "Whiskey Sour - Fig": "A seasonal twist on the classic Whiskey Sour with the addition of fig, adding a rich and slightly sweet undertone that complements the whiskey’s warmth.",
-        "Whiskey Sour - Apple Cider": "A fall-inspired version of the Whiskey Sour made with fresh apple cider, creating a cozy, spiced flavor that pairs beautifully with whiskey."
+        "Clarified Bees Knees": "Made this drink last time, and I enjoyed it so made it again. Clarification removes impurities, resulting in a smoother finish and long shelf life. The honey I used was from Savannah Bee Company.",
+        "Hood Winked": "This drink is also courtesy of Justin Sajda. Check him out on insta or TikTok, @thirstywhale__. I'm more or less learning everything new from him. Our friend group usually likes margs, this has some similarities so thought I'd try it out.",
+        "Whiskey Sour - Classic": "Still trying to master the classics. When better to try it than on people who don't know the difference.",
+        "Whiskey Sour - Fig": "I'll be honest here. I saw I had some fig preserves left in the fridge and was like shit how can I can use this up. Going on a whim with this one, but too late you already ordered it.",
+        "Whiskey Sour - Apple Cider": "If you previously ordered the fig whiskey sour, I added this because I thought that one was risky. If you didn't, well I just wanted a spinoff of a drink I already planned, but that had some fall ambiance to it.",
+        "Pineapple Sunset": "Seems like we should be drinking these on the beach, but close enough.",
+        "Apple Cider Mule": "Apple Cider and Ginger Beer, seemed pretty fall vibes to me."
     };
     // Submit Order
     function submitOrder() {
@@ -166,28 +239,6 @@
       .catch(error => console.error('Error!', error.message));
     }
 
-    // function sendToGoogleSheets(name, drink) {
-    //   const scriptURL = 'https://script.google.com/macros/s/AKfycbymwydUgkV2p_2FH5OI9FuTLxqdcvUHCiPWHmWuRqU2kp0p1FHkfe9yocT_xe0HR5duyA/exec';
-    //   fetch(scriptURL, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },  // Ensures JSON data is sent
-    //     body: JSON.stringify({ name, drink })            // Converts data to JSON
-    // })
-    //     .then(response => response.text())
-    //     .then(result => console.log('Success:', result))
-    //     .catch(error => console.error('Error:', error));
-    // }
-    // function sendToGoogleSheets(name, drink) {
-    //     const scriptURL = 'https://script.google.com/macros/s/AKfycbxtBtgPiGvCrBXOKzrZ5LwGvlYtoVnz-_TZnD4DQ3jS/dev';
-    //     fetch(scriptURL, {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ name, drink })
-    //     })
-    //     .then(response => response.text())
-    //     .then(result => console.log('Success:', result))
-    //     .catch(error => console.error('Error:', error));
-    //     }
   </script>
 </body>
 </html>
