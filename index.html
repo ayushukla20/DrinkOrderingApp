@@ -9,6 +9,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       background-color: #FAF3E3; /*Creamish off-white background*/
+      background-color: #B2FFFF;
       margin: 0;
       padding: 0;
 
@@ -17,7 +18,6 @@
       display: none;
     }
     
-
     .active {
       display: block;
     }
@@ -116,7 +116,7 @@
       border: 0;
     }
     .gold { color: gold; }
-    .orange { color: rgb(244, 159, 0); }
+    .orange { color:chocolate; }
     .yellow { color: #FFD700; } /* Yellow for Classic Whiskey Sour */
     .purple { color: purple; }
     .brown { color: #8B4513; } /* Brown for Apple Cider Whiskey Sour */
@@ -198,7 +198,9 @@
   <!-- Page 3: Order Confirmation -->
   <div id="page3" class="page">
     <h2 id="thank-you-message"></h2>
-    <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
+    <div class="menu-item">
+      <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
+    </div>
     
     <button class="button-34" onclick="startOver()" style="margin-top: 10px;">order a new drink</button>
 
