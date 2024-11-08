@@ -28,6 +28,11 @@
       font-size: 1.1em;
       color: rgba(38, 10, 116, 0.817)
     }
+    h3 {
+      font-size: 1.1em;
+      color: rgba(38, 10, 116, 0.817);
+      font-style: italic;
+    }
     .drink-name {
       letter-spacing: .1rem;
     }
@@ -110,15 +115,17 @@
 
   <!-- Page 1: User Name Input -->
   <div id="page1" class="page active">
-    <h2>Who's the drink for?</h2>
+    <br><br><br><br><br>
+    <h2>who's the drink for?</h2>
     <input type="text" id="username" placeholder="enter your name"><br><br>
-    <button class="button-34" onclick="goToMenu()">View Menu</button>
+    <button class="button-34" onclick="goToMenu()">view menu</button>
     <p id="name-error" style="color: red; display: none;">Please enter a name.</p>
   </div>
 
   <!-- Page 2: Menu Selection -->
   <div id="page2" class="page">
     <h1 id="welcome-message"></h1>
+    <h3 id="instructions"></h3>
     <div class="menu-container">
       <div class="menu-item">
         <h2>today's features</h2>
@@ -163,8 +170,8 @@
         </button>
       </div>
     </div>
-    <br><br>
-    <button class="button-34" onclick="submitOrder()">Order</button>
+    <br>
+    <button class="button-34" onclick="submitOrder()">order</button>
     <p id="drink-error" style="color: red; display: none;">Please select a drink.</p>
   </div>
 
@@ -172,7 +179,7 @@
   <div id="page3" class="page">
     <h2 id="thank-you-message"></h2>
     <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
-    <button class="button-34" onclick="startOver()">Order a New Drink</button>
+    <button class="button-34" onclick="startOver()">order a new drink</button>
   </div>
 
   <script>
@@ -186,7 +193,8 @@
         document.getElementById('name-error').style.display = 'block';
       } else {
         document.getElementById('name-error').style.display = 'none';
-        document.getElementById('welcome-message').textContent = `welcome ${userName}, please select which drink you would like and then hit order at the bottom.`;
+        document.getElementById('welcome-message').textContent = `welcome ${userName}!`;
+        document.getElementById('instructions').textContent = `please select which drink you would like and then hit order at the bottom.`;
         document.getElementById('page1').classList.remove('active');
         document.getElementById('page2').classList.add('active');
       }
@@ -200,23 +208,37 @@
     }
     // Map of drink descriptions
     const drinkDescriptions = {
-        "Clarified Bees Knees": "Made this drink last time, and I enjoyed it so made it again. Clarification removes impurities, resulting in a smoother finish and long shelf life. The honey I used was from Savannah Bee Company.",
-        "Hood Winked": "This drink is also courtesy of Justin Sajda. Check him out on insta or TikTok, @thirstywhale__. I'm more or less learning everything new from him. Our friend group usually likes margs, this has some similarities so thought I'd try it out.",
+        "Clarified Bees Knees": "i made this drink last time, and i enjoyed it so made it again<br><br>clarification, removes impurities, resulting in a smoother finish and long shelf life<br>i did a milk wash, but i think any high fat content dairy product would work<br><br> the honey i used was from Savannah Bee Company",
+        "Hood Winked": "Our friend group usually likes margs, this has some similarities so thought I'd try it out<br><br>This drink is also courtesy of Justin Sajda, Check him out on insta or TikTok, @thirstywhale__.<br>I'm more or less learning everything new from him",
         "Whiskey Sour - Classic": "Still trying to master the classics. When better to try it than on people who don't know the difference.",
         "Whiskey Sour - Fig": "I'll be honest here. I saw I had some fig preserves left in the fridge and was like shit how can I can use this up. Going on a whim with this one, but too late you already ordered it.",
-        "Whiskey Sour - Apple Cider": "If you previously ordered the fig whiskey sour, I added this because I thought that one was risky. If you didn't, well I just wanted a spinoff of a drink I already planned, but that had some fall ambiance to it.",
+        "Whiskey Sour - Apple Cider": "If you previously ordered the fig whiskey sour, I added this because I thought that one was risky. If you didn't, well I just wanted a spinoff of a drink I already planned, but one that had some fall ambiance to it.",
         "Pineapple Sunset": "Seems like we should be drinking these on the beach, but close enough.",
         "Apple Cider Mule": "Apple Cider and Ginger Beer, seemed pretty fall vibes to me."
     };
+    const keepUpperCase = ['Justin Sajda', 'Savannah Bee Company']; // Define exceptions
+
+    // When setting the drink info
+    function formatDrinkInfo(selectedDrink) {
+      let description = '<em>' + drinkDescriptions[selectedDrink].toLowerCase() + '</em>'|| "Placeholder text for your selected drink.";
+      
+      // Replace specific words or phrases back to their original case
+      keepUpperCase.forEach(word => {
+        const regex = new RegExp(word.toLowerCase(), 'g');  // Case-insensitive search
+        description = description.replace(regex, word);   // Replace with original case
+      });
+      
+      return description;
+    }
     // Submit Order
     function submitOrder() {
       if (!selectedDrink) {
         document.getElementById('drink-error').style.display = 'block';
       } else {
         document.getElementById('drink-error').style.display = 'none';
-        document.getElementById('thank-you-message').textContent = `Thank you ${userName}! Your ${selectedDrink} will be ready soon.`;
+        document.getElementById('thank-you-message').innerHTML = `thank you ${userName}! your ${'<em>' + selectedDrink.toLowerCase() + '</em>'} will be ready soon.`;
         // Display the specific description for the selected drink
-        document.getElementById('drink-info').textContent = drinkDescriptions[selectedDrink] || "Placeholder text for your selected drink.";
+        document.getElementById('drink-info').innerHTML = formatDrinkInfo(selectedDrink) //'<em>' + drinkDescriptions[selectedDrink].toLowerCase() + '</em>'|| "Placeholder text for your selected drink.";
         document.getElementById('page2').classList.remove('active');
         document.getElementById('page3').classList.add('active');
         // Send data to Google Sheets
