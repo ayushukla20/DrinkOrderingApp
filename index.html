@@ -210,6 +210,8 @@
     <button class="button-34" onclick="redirectToTipJar()" style="margin-top: 10px;">
       tip your bartender
     </button>
+    <br><br><br><br>
+    <small>all tips go towards booze and improving my UI skillsets</small>
   </div>
 
 
@@ -270,6 +272,7 @@
         document.getElementById('thank-you-message').innerHTML = `thank you ${userName}! your ${'<em>' + selectedDrink.toLowerCase() + '</em>'} will be ready soon.`;
         // Display the specific description for the selected drink
         document.getElementById('drink-info').innerHTML = formatDrinkInfo(selectedDrink) //'<em>' + drinkDescriptions[selectedDrink].toLowerCase() + '</em>'|| "Placeholder text for your selected drink.";
+        
         document.getElementById('page2').classList.remove('active');
         document.getElementById('page3').classList.add('active');
         // Send data to Google Sheets
