@@ -115,7 +115,7 @@
 
   <!-- Page 1: User Name Input -->
   <div id="page1" class="page active">
-    <br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
     <h2>who's the drink for?</h2>
     <input type="text" id="username" placeholder="enter your name"><br><br>
     <button class="button-34" onclick="goToMenu()">view menu</button>
@@ -175,12 +175,27 @@
     <p id="drink-error" style="color: red; display: none;">Please select a drink.</p>
   </div>
 
-  <!-- Page 3: Order Confirmation -->
+  <!-- Page 3: Order Confirmation
   <div id="page3" class="page">
     <h2 id="thank-you-message"></h2>
     <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
     <button class="button-34" onclick="startOver()">order a new drink</button>
+  </div> -->
+
+  <!-- Page 3: Order Confirmation -->
+  <div id="page3" class="page">
+    <h2 id="thank-you-message"></h2>
+    <p id="drink-info">Placeholder for drink information based on the selected drink.</p>
+    
+    <button class="button-34" onclick="startOver()" style="margin-top: 10px;">order a new drink</button>
+
+    <!-- New Tip Jar Button --> 
+     <!--  padding: 10px 20px; background-color: #FFD700; border: none; cursor: pointer; -->
+    <button class="button-34" onclick="redirectToTipJar()" style="margin-top: 10px;">
+      tip your bartender
+    </button>
   </div>
+
 
   <script>
     let userName = '';
@@ -194,7 +209,7 @@
       } else {
         document.getElementById('name-error').style.display = 'none';
         document.getElementById('welcome-message').textContent = `welcome ${userName}!`;
-        document.getElementById('instructions').textContent = `please select which drink you would like and then hit order at the bottom.`;
+        document.getElementById('instructions').textContent = `please select which drink you would like and then scroll to the bottom & hit order`;
         document.getElementById('page1').classList.remove('active');
         document.getElementById('page2').classList.add('active');
       }
@@ -265,6 +280,12 @@
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message));
     }
+    // Redirect to the tip jar link
+    function redirectToTipJar() {
+      const tipJarURL = 'https://www.venmo.com/u/Ayush-Shukla-1'; // Replace with your actual tip jar URL
+      window.open(tipJarURL, '_blank');
+    }
+
 
   </script>
 </body>
