@@ -15,16 +15,21 @@
     .page {
       display: none;
     }
+    
+
     .active {
       display: block;
     }
     h1 {
       color: rgba(38, 10, 116, 0.817);
-      font-size: 1.5em;
+      font-size: 1.3em;
     }
     h2 {
       font-size: 1.1em;
       color: rgba(38, 10, 116, 0.817)
+    }
+    .drink-name {
+      letter-spacing: .1rem;
     }
     .horizontal_line {
             width: 100%;
@@ -91,7 +96,7 @@
       border: 0;
     }
     .gold { color: gold; }
-    .orange { color: orange; }
+    .orange { color: rgb(244, 159, 0); }
     .yellow { color: #FFD700; } /* Yellow for Classic Whiskey Sour */
     .purple { color: purple; }
     .brown { color: #8B4513; } /* Brown for Apple Cider Whiskey Sour */
@@ -106,7 +111,7 @@
   <!-- Page 1: User Name Input -->
   <div id="page1" class="page active">
     <h2>Who's the drink for?</h2>
-    <input type="text" id="username" placeholder="Enter your name"><br><br>
+    <input type="text" id="username" placeholder="enter your name"><br><br>
     <button class="button-34" onclick="goToMenu()">View Menu</button>
     <p id="name-error" style="color: red; display: none;">Please enter a name.</p>
   </div>
@@ -116,45 +121,45 @@
     <h1 id="welcome-message"></h1>
     <div class="menu-container">
       <div class="menu-item">
-        <h2>Today's Features</h2>
+        <h2>today's features</h2>
         <div class="horizontal_line"></div>
         <button class="drink-button orange" onclick="selectDrink('Clarified Bees Knees')">
-          Clarified Bees Knees<br>
-          <small>Gin | Lemon | Honey</small>
+          <span class="drink-name">clarified bees knees</span><br>
+          <small>gin&nbsp;&nbsp;&#8226;&nbsp;&nbsp;lemon&nbsp;&nbsp;&#8226;&nbsp;&nbsp;honey</small>
         </button>
         <button class="drink-button orange" onclick="selectDrink('Hood Winked')">
-          Hood Winked<br>
-          <small>Mezcal | Pineapple | Aperol | Lemon</small>
+          <span class="drink-name">hood winked</span><br>
+          <small>mezcal&nbsp;&nbsp;&#8226;&nbsp;&nbsp;pineapple&nbsp;&nbsp;&#8226;&nbsp;&nbsp;aperol&nbsp;&nbsp;&#8226;&nbsp;&nbsp;lemon&nbsp;&nbsp;&#8226;&nbsp;&nbsp;rich turbinado</small>
         </button>
       </div>
       <div class="menu-item">
         <br>
-        <h2>Whiskey Sours</h2>
+        <h2>whiskey sours</h2>
         <div class="horizontal_line"></div>
         <button class="drink-button orange" onclick="selectDrink('Whiskey Sour - Classic')">
-          Classic<br>
-          <small>Bourbon | Lemon | Simple | Aromatics</small>
+          <span class="drink-name">classic</span><br>
+          <small>bourbon&nbsp;&nbsp;&#8226;&nbsp;&nbsp;lemon&nbsp;&nbsp;&#8226;&nbsp;&nbsp;simple&nbsp;&nbsp;&#8226;&nbsp;&nbsp;aromatics</small>
         </button>
         <button class="drink-button orange" onclick="selectDrink('Whiskey Sour - Fig')">
-          Dementors in Little Winging! Whatever next?<br>
-          <small>Bourbon | Figg | Lemon</small>
+          <span class="drink-name">demontors in little winging! whatever next?</span><br>
+          <small>bourbon&nbsp;&nbsp;&#8226;&nbsp;&nbsp;Figg&nbsp;&nbsp;&#8226;&nbsp;&nbsp;lemon</small>
         </button>
         <button class="drink-button orange" onclick="selectDrink('Whiskey Sour - Apple Cider')">
-          Wishing for that Fall Weather<br>
-          <small>Bourbon | Apple Cider | Maple Syrup</small>
+          <span class="drink-name">wishing for that fall weather</span><br>
+          <small>bourbon&nbsp;&nbsp;&#8226;&nbsp;&nbsp;apple cider&nbsp;&nbsp;&#8226;&nbsp;&nbsp;maple syrup</small>
         </button>
       </div>
       <div class="menu-item">
         <br>
-        <h2>Mocktails</h2>
+        <h2>mocktails</h2>
         <div class="horizontal_line"></div>
         <button class="drink-button orange" onclick="selectDrink('Pineapple Sunset')">
-          Pineapple Sunset<br>
-          <small>Pineapple | Lime | Pomegranate</small>
+          <span class="drink-name">pineapple sunset</span><br>
+          <small>pineapple&nbsp;&nbsp;&#8226;&nbsp;&nbsp;lime&nbsp;&nbsp;&#8226;&nbsp;&nbsp;pomegranate</small>
         </button>
         <button class="drink-button orange" onclick="selectDrink('Apple Cider Mule')">
-          Apple Cider Mule<br>
-          <small>Apple Cider | Ginger Beer | Lime</small>
+          <span class="drink-name">apple cider mule</span><br>
+          <small>apple cider&nbsp;&nbsp;&#8226;&nbsp;&nbsp;ginger beer&nbsp;&nbsp;&#8226;&nbsp;&nbsp;lime</small>
         </button>
       </div>
     </div>
@@ -181,7 +186,7 @@
         document.getElementById('name-error').style.display = 'block';
       } else {
         document.getElementById('name-error').style.display = 'none';
-        document.getElementById('welcome-message').textContent = `Welcome ${userName}, please select which drink you would like and hit order at the bottom.`;
+        document.getElementById('welcome-message').textContent = `welcome ${userName}, please select which drink you would like and then hit order at the bottom.`;
         document.getElementById('page1').classList.remove('active');
         document.getElementById('page2').classList.add('active');
       }
